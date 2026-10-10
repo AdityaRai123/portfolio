@@ -40,7 +40,7 @@ Every push to `main` builds the site with GitHub Actions and publishes `dist/` t
 
 All content lives in [`src/data/portfolio.ts`](src/data/portfolio.ts) — profile, projects, education, experience, achievements, certifications, skills, journey seasons and top picks.
 
-**Intro video:** `public/assets/intro.mp4` (with `intro-poster.jpg`) plays when you press ▶ Play Intro.
+**Videos:** `public/assets/intro.mp4` plays when you press ▶ Play Intro, and each project has its own animated explainer episode in `public/assets/videos/` (opened with ▶ Play Episode on the project card or in the project details).
 
 - **Resume:** replace `public/assets/Aditya_Rai_Resume.pdf`.
 - **Certificates:** stored in `public/assets/certificates/`.

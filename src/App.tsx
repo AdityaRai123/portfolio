@@ -23,6 +23,7 @@ import { EASE } from './components/fx';
 const PlayIntro = lazy(() => import('./components/PlayIntro'));
 const ProjectModal = lazy(() => import('./components/ProjectModal'));
 const ResumeModal = lazy(() => import('./components/ResumeModal'));
+const EpisodePlayer = lazy(() => import('./components/EpisodePlayer'));
 
 type Stage = 'opening' | 'profiles' | 'home';
 
@@ -51,6 +52,7 @@ function Series() {
   const [profileId, setProfileId] = useState<ProfileId>(stored ?? 'aditya');
   const [playing, setPlaying] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
+  const [episode, setEpisode] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const { scrollTo, lock, unlock } = useSmoothScroll();
@@ -91,12 +93,13 @@ function Series() {
 
   const closeIntro = useCallback(() => setPlaying(false), []);
   const closeProject = useCallback(() => setProject(null), []);
+  const closeEpisode = useCallback(() => setEpisode(null), []);
   const closeResume = useCallback(() => setResumeOpen(false), []);
 
   const sections: Record<SectionId, ReactNode> = {
     about: <About />,
     journey: <Seasons />,
-    originals: <Originals onOpen={setProject} />,
+    originals: <Originals onOpen={setProject} onPlay={setEpisode} />,
     picks: <TopPicks />,
     skills: <Skills />,
     moments: <Achievements />,
@@ -131,8 +134,9 @@ function Series() {
 
       <Suspense fallback={null}>
         <AnimatePresence>{playing && <PlayIntro key="intro" onClose={closeIntro} />}</AnimatePresence>
-        <AnimatePresence>{project && <ProjectModal key="project" project={project} onClose={closeProject} onSwitch={setProject} />}</AnimatePresence>
+        <AnimatePresence>{project && <ProjectModal key="project" project={project} onClose={closeProject} onSwitch={setProject} onPlay={setEpisode} />}</AnimatePresence>
         <AnimatePresence>{resumeOpen && <ResumeModal key="resume" onClose={closeResume} />}</AnimatePresence>
+        <AnimatePresence>{episode && <EpisodePlayer key="episode" project={episode} onClose={closeEpisode} />}</AnimatePresence>
       </Suspense>
 
       <AnimatePresence>

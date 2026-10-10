@@ -3,7 +3,7 @@ import type { Project } from '../data/portfolio';
 import { EASE, Tilt } from './fx';
 import { ProjectArt } from './Poster';
 
-export default function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
+export default function ProjectCard({ project, index, onOpen, onPlay }: { project: Project; index: number; onOpen: () => void; onPlay: () => void }) {
   return (
     <motion.article
       className="w-[84vw] shrink-0 snap-start sm:w-[62vw] lg:w-[46vw] xl:w-[42vw]"
@@ -44,8 +44,8 @@ export default function ProjectCard({ project, index, onOpen }: { project: Proje
             <motion.h3 layoutId={`title-${project.id}`} className="font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[0.88] tracking-wide text-bone">
               {project.title}
             </motion.h3>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-bone/75 sm:text-[15px]">{project.logline}</p>
-            <div className="mt-4 flex flex-wrap gap-1.5">
+            <p className="mt-3 line-clamp-3 max-w-md text-sm leading-relaxed text-bone/75 sm:line-clamp-none sm:text-[15px]">{project.logline}</p>
+            <div className="mt-4 flex max-h-[58px] flex-wrap gap-1.5 overflow-hidden sm:max-h-none">
               {project.stack.map((t) => (
                 <span key={t} className="rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-medium text-bone/90 backdrop-blur">
                   {t}
@@ -53,7 +53,20 @@ export default function ProjectCard({ project, index, onOpen }: { project: Proje
               ))}
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <span className="flex min-h-11 items-center gap-2 rounded-md bg-bone px-5 text-sm font-bold text-ink transition group-hover:bg-white">▶ View Project</span>
+              {project.video && (
+                <button
+                  type="button"
+                  data-cursor="play"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onPlay();
+                  }}
+                  className="flex min-h-11 items-center gap-2 rounded-md bg-crimson px-5 text-sm font-bold text-white shadow-[0_0_30px_rgba(229,19,43,0.45)] transition hover:bg-crimson-2"
+                >
+                  ▶ Play Episode
+                </button>
+              )}
+              <span className="flex min-h-11 items-center gap-2 rounded-md bg-bone px-5 text-sm font-bold text-ink transition group-hover:bg-white">Details</span>
               {project.live && (
                 <a
                   href={project.live}

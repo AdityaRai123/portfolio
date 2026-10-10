@@ -10,7 +10,7 @@ const block = {
   show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: EASE } },
 };
 
-export default function ProjectModal({ project, onClose, onSwitch }: { project: Project; onClose: () => void; onSwitch: (p: Project) => void }) {
+export default function ProjectModal({ project, onClose, onSwitch, onPlay }: { project: Project; onClose: () => void; onSwitch: (p: Project) => void; onPlay: (p: Project) => void }) {
   useScrollLock(true);
   const scroller = useRef<HTMLDivElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
@@ -91,8 +91,20 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
               {project.logline}
             </motion.p>
 
-            {(project.live || project.github) && (
+            {(project.live || project.github || project.video) && (
               <motion.div variants={block} className="mt-6 flex flex-wrap gap-3">
+                {project.video && (
+                  <Magnetic>
+                    <button
+                      type="button"
+                      data-cursor="play"
+                      onClick={() => onPlay(project)}
+                      className="flex min-h-12 items-center gap-2 rounded-md bg-crimson px-6 text-[15px] font-bold text-white shadow-[0_0_40px_rgba(229,19,43,0.45)] transition hover:bg-crimson-2"
+                    >
+                      ▶ Play Episode
+                    </button>
+                  </Magnetic>
+                )}
                 {project.live && (
                   <Magnetic>
                     <a

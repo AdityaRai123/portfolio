@@ -9,10 +9,12 @@ import ProjectCard from './ProjectCard';
  * ORIGINALS — on desktop the section pins and scrolls sideways like a title sequence.
  * On touch / small screens / reduced motion it becomes a native swipe rail.
  */
-export default function Originals({ onOpen }: { onOpen: (p: Project) => void }) {
+type Handlers = { onOpen: (p: Project) => void; onPlay: (p: Project) => void };
+
+export default function Originals({ onOpen, onPlay }: Handlers) {
   const desktop = useDesktop();
   const reduced = useReducedMotionPref();
-  return desktop && !reduced ? <PinnedOriginals onOpen={onOpen} /> : <RailOriginals onOpen={onOpen} />;
+  return desktop && !reduced ? <PinnedOriginals onOpen={onOpen} onPlay={onPlay} /> : <RailOriginals onOpen={onOpen} onPlay={onPlay} />;
 }
 
 function Intro() {
@@ -23,7 +25,7 @@ function Intro() {
       </p>
       <RevealText as="h2" text="ORIGINALS" className="font-display text-[clamp(3.5rem,9vw,8rem)] leading-[0.85] text-bone" />
       <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-mist">
-        Four productions, all live — a multi-agent AI platform, a stock prediction system, a language-learning app and an image enhancer. Open any title for the full story.
+        Four productions, all live — a multi-agent AI platform, a stock prediction system, a language-learning app and an image enhancer. Press ▶ Play Episode and I’ll walk you through each one.
       </p>
       <p className="mt-6 hidden text-xs tracking-[0.24em] text-smoke lg:block">SCROLL TO BROWSE →</p>
     </div>
@@ -46,7 +48,7 @@ function Outro() {
   );
 }
 
-function PinnedOriginals({ onOpen }: { onOpen: (p: Project) => void }) {
+function PinnedOriginals({ onOpen, onPlay }: Handlers) {
   const wrap = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const [dist, setDist] = useState(0);
@@ -81,7 +83,7 @@ function PinnedOriginals({ onOpen }: { onOpen: (p: Project) => void }) {
         <motion.div ref={track} style={{ x }} className="gutter relative flex items-center gap-8 pr-[12vw]" data-cursor="drag">
           <Intro />
           {projects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} onOpen={() => onOpen(p)} />
+            <ProjectCard key={p.id} project={p} index={i} onOpen={() => onOpen(p)} onPlay={() => onPlay(p)} />
           ))}
           <Outro />
         </motion.div>
@@ -96,7 +98,7 @@ function PinnedOriginals({ onOpen }: { onOpen: (p: Project) => void }) {
   );
 }
 
-function RailOriginals({ onOpen }: { onOpen: (p: Project) => void }) {
+function RailOriginals({ onOpen, onPlay }: Handlers) {
   return (
     <div className="py-6">
       <div className="gutter mb-6">
@@ -110,7 +112,7 @@ function RailOriginals({ onOpen }: { onOpen: (p: Project) => void }) {
         transition={{ duration: 0.9, ease: EASE }}
       >
         {projects.map((p, i) => (
-          <ProjectCard key={p.id} project={p} index={i} onOpen={() => onOpen(p)} />
+          <ProjectCard key={p.id} project={p} index={i} onOpen={() => onOpen(p)} onPlay={() => onPlay(p)} />
         ))}
         <Outro />
       </motion.div>

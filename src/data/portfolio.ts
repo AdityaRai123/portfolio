@@ -107,6 +107,9 @@ export type Project = {
   metrics: Metric[];
   github?: string;
   live?: string;
+  /** Animated explainer episode for this project. */
+  video?: string;
+  videoPoster?: string;
   palette: Palette;
   motif: 'shield' | 'flow' | 'tenants' | 'chart' | 'lens';
 };
@@ -142,6 +145,8 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/AdityaRai123/AgentFlow',
     live: 'https://agent-flow-ten-topaz.vercel.app',
+    video: asset('assets/videos/agentflow.mp4'),
+    videoPoster: asset('assets/videos/agentflow.jpg'),
     palette: { from: '#2a0610', via: '#7a0f24', to: '#0b0710', accent: '#ff3d5a' },
     motif: 'flow',
   },
@@ -173,6 +178,8 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/AdityaRai123/Quantpredict',
     live: 'https://quantpredict.netlify.app',
+    video: asset('assets/videos/quantpredict.mp4'),
+    videoPoster: asset('assets/videos/quantpredict.jpg'),
     palette: { from: '#03150f', via: '#0d5a40', to: '#050a08', accent: '#46e3a8' },
     motif: 'chart',
   },
@@ -203,6 +210,8 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/AdityaRai123/polylearn',
     live: 'https://poly-learn.netlify.app/auth',
+    video: asset('assets/videos/polylearn.mp4'),
+    videoPoster: asset('assets/videos/polylearn.jpg'),
     palette: { from: '#1a0d02', via: '#8a4a07', to: '#0a0806', accent: '#ffb547' },
     motif: 'tenants',
   },
@@ -228,11 +237,13 @@ export const projects: Project[] = [
     metrics: [
       { value: '5', label: 'pipeline stages' },
       { value: '4', label: 'quality signals measured' },
-      { value: '85', label: 'automated tests' },
+      { value: '95', label: 'automated tests' },
       { value: '<1s', label: 'per 512×512 image on CPU' },
     ],
     github: 'https://github.com/AdityaRai123/smart-image-enhancement',
     live: 'https://smart-image-enhancement.streamlit.app',
+    video: asset('assets/videos/smartimage.mp4'),
+    videoPoster: asset('assets/videos/smartimage.jpg'),
     palette: { from: '#04121f', via: '#0f4c6e', to: '#05080d', accent: '#4cc9ff' },
     motif: 'lens',
   },
