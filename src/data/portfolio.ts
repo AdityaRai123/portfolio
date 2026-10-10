@@ -29,6 +29,8 @@ export const profile = {
   },
   resumePdf: asset('assets/Aditya_Rai_Resume.pdf'),
   resumeFileName: 'Aditya_Rai_Resume.pdf',
+  introVideo: asset('assets/intro.mp4'),
+  introPoster: asset('assets/intro-poster.jpg'),
   portrait: {
     src: asset('assets/portrait-720.webp'),
     srcSet: `${asset('assets/portrait-420.webp')} 420w, ${asset('assets/portrait-720.webp')} 720w, ${asset('assets/portrait-1100.webp')} 1100w`,
@@ -628,49 +630,6 @@ export const topPicks: TopPick[] = [
   { label: 'Leadership', title: 'TAG POC', detail: 'Led a 40-member team at VIT', palette: amber },
   { label: 'Database credential', title: 'IBM SQL 101', detail: 'Cognitive Class • 91%', palette: jade },
   { label: 'Lean engineering', title: '42% Lighter', detail: 'Server memory cut in AgentFlow', palette: violet },
-];
-
-/** Slides for the "▶ Play Intro" cinematic sequence. */
-export type IntroSlide = { kicker: string; title: string; lines: string[]; chips?: string[] };
-
-export const introSlides: IntroSlide[] = [
-  {
-    kicker: 'Education',
-    title: 'B.Tech · IT',
-    lines: ['Vellore Institute of Technology, Vellore', '2023 – 2027'],
-    chips: ['VIT', 'Information Technology'],
-  },
-  {
-    kicker: 'Skills',
-    title: 'Full stack + AI.',
-    lines: ['Python, JavaScript, C++, Java, SQL · React, Node.js, FastAPI', 'LangGraph, Gemini, RAG · XGBoost, LSTM · Docker, PostgreSQL'],
-    chips: ['Python', 'React', 'FastAPI', 'LangGraph', 'Docker', 'PostgreSQL'],
-  },
-  {
-    kicker: 'Experience',
-    title: 'The Internship',
-    lines: ['Software Development Intern · Trayistats AI Technologies', 'May 2025 – Jul 2025 · Noida', '6+ pages · 5+ REST APIs · Lighthouse 75 → 90+'],
-  },
-  {
-    kicker: 'Projects',
-    title: 'Four Originals',
-    lines: ['AgentFlow AI — 6 agents, RAG, 215 CI tests', 'QuantPredict — 8 models across 49 stocks', 'PolyLearn — lessons & server-graded tests', 'Smart Image Enhancer — explainable AI enhancement'],
-  },
-  {
-    kicker: 'Achievements',
-    title: 'Top Moments',
-    lines: ['Semi-Finalist — HackBattle, IEEE CS VIT (200+ teams)', 'Senior Core & POC — Technology and Gaming Club', 'Led a 40-member team for TAG Clash & OverClock'],
-  },
-  {
-    kicker: 'Certified',
-    title: 'Scored high',
-    lines: ['MERN Full Stack — 98% · Ethnus Codemithra', 'Oracle OCI AI Foundations — 93% · IBM SQL 101 — 91%'],
-  },
-  {
-    kicker: 'Current mission',
-    title: 'Now building',
-    lines: ['Multi-agent AI · Machine Learning · Full-Stack Development'],
-  },
 ];
 
 export type ProfileId = 'aditya' | 'recruiter' | 'developer' | 'creative';
